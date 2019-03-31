@@ -7,9 +7,9 @@ This directory contains the base image for the ci-server project. It outputs a V
 
 ## requirements
 
-make >= 4.2.1
-packer >= 1.3.5
-VirtualBox >= 6.0
+- make >= 4.2.1
+- packer >= 1.3.5
+- VirtualBox >= 6.0
 
 ## usage
 
