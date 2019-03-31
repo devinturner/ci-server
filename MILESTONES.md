@@ -6,7 +6,7 @@
 - Discovery
     - Terraform support with T/C-CI (TravisCI and/or CircleCI)
 - Development
-    - Install jenkins + dependencies
+    - ~~Install jenkins + dependencies~~
     - Install docker + dependencies
     - Store image on Dropbox
 - Continuous Integration
