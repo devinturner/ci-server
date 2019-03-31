@@ -1,7 +1,3 @@
-# build
-## Update http/preseed.cfg with username/password
-## Run packer build with correct variables
-
 ROOT_PASSWORD := packer
 USER_FULLNAME := packer
 USER_PASSWORD := packer
@@ -18,6 +14,17 @@ preseed : http/preseed_tpl.cfg
 		-e 's/USER_PASSWORD/${USER_PASSWORD}/g' \
 		-e 's/USERNAME/${USERNAME}/g' \
 		http/preseed_tpl.cfg > http/preseed.cfg
+
+validate : version
+	@${eval VERSION := ${shell cat VERSION}}
+	@packer validate \
+		-var ROOT_PASSWORD=${ROOT_PASSWORD}\
+		-var USERNAME=${USERNAME} \
+		-var USER_PASSWORD=${USER_PASSWORD} \
+		-var PACKER_OUTPUT_DIR=${PACKER_OUTPUT_DIR} \
+		-var PACKER_HEADLESS=${PACKER_HEADLESS} \
+		-var VERSION=${VERSION} \
+		template.json
 
 build : preseed version clean
 	@${eval VERSION := ${shell cat VERSION}}

@@ -3,17 +3,13 @@
 
 ## v0.1.0 - Local
 
-- Discovery
-    - Terraform support with T/C-CI (TravisCI and/or CircleCI)
 - Development
     - ~~Install jenkins + dependencies~~
     - ~~Install docker + dependencies~~
-    - Store image on Dropbox
-- Continuous Integration
-    - Run tests on all pushes to master branch on Travis/CircleCI
-    - Build and push master branch builds to Dropbox
-- Continous Delivery
+    - ~~Store image on Digital Ocean~~
     - Update image format to work with Digital Ocean
+- Continuous Integration
+    - Run inspec tests against VirtualBox
 
 ## v0.2.0 - Digital Ocean
 
