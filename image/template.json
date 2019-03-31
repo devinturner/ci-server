@@ -1,0 +1,91 @@
+{
+    "variables": {
+        "USERNAME": "",
+        "USER_PASSWORD": "",
+        "PACKER_OUTPUT_DIR": "",
+        "PACKER_HEADLESS": "true",
+        "VERSION": ""
+    },
+    "provisioners": [
+        {
+            "type": "shell",
+            "execute_command": "echo '{{user `ROOT_PASSWORD`}}' | {{ .Vars }} sudo -S -E bash '{{ .Path }}'",
+            "inline": "echo '{{user `USERNAME`}} ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers"
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "sudo apt-get -qq update",
+                "sudo apt-get -qq install wget openjdk-8-jdk apt-transport-https ca-certificates gnupg2 software-properties-common -y"
+            ]
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -",
+                "sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'",
+                "sudo apt-get -qq update",
+                "sudo apt-get -qq install jenkins -y"
+            ]
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "wget -q -O - https://download.docker.com/linux/debian/gpg | sudo apt-key add -",
+                "sudo add-apt-repository 'deb [arch=amd64 https://download.docker.com/linux/debian stretch stable'",
+                "sudo apt-get -qq update",
+                "sudo apt-get -qq install docker-ce docker-ce-cli containerd.io"
+            ]
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "sudo apt-get -qq autoremove -y --purge",
+                "sudo apt-get -qq autoclean",
+                "sudo dd if=/dev/zero of=/EMPTY bs=1M || true",
+                "sudo rm -rf /EMPTY"
+            ]
+        }
+    ],
+    "builders": [
+        {
+            "type": "virtualbox-iso",
+            "output_directory": "{{user `PACKER_OUTPUT_DIR`}}",
+            "boot_command": [
+                "<esc><wait>",
+                "install <wait>",
+                "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+                "debian-installer=en_US.UTF-8 ",
+                "auto ",
+                "locale=en_US.UTF-8 ",
+                "kdb-chooser/method=us ",
+                "keyboard-configuration/xkb-keymap=us ",
+                "netcfg/get_hostname=ci-server ",
+                "netcfg/get_domain=devinturner.local ",
+                "fb=false ",
+                "debconf/frontend=noninteractive ",
+                "console-setup/ask_detect=false ",
+                "console-keymaps-at/keymap=us ",
+                "grub-installer/bootdev=/dev/sda <wait>",
+                "<enter><wait>"
+            ],
+            "boot_wait": "5s",
+            "guest_os_type": "Debian_64",
+            "headless": "{{user `PACKER_HEADLESS`}}",
+            "http_directory": "http",
+            "iso_urls": [
+                "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-9.8.0-amd64-xfce-CD-1.iso"
+            ],
+            "iso_checksum_type": "sha256",
+            "iso_checksum": "06888814f7c3d696473e85bb7d9d39cbd98ba409163944d046ff94b71aabae5b",
+            "ssh_username": "{{user `USERNAME`}}",
+            "ssh_password": "{{user `USER_PASSWORD`}}",
+            "ssh_port": 22,
+            "ssh_wait_timeout": "10000s",
+            "guest_additions_path": "VBoxGuestAdditions_{{ .Version }}.iso",
+            "shutdown_command": "echo {{user `USER_PASSWORD`}} | sudo -S shutdown -P now",
+            "vm_name": "ci-server-{{user `VERSION`}}",
+            "virtualbox_version_file": ".vbox_version"
+        }
+    ]
+}
