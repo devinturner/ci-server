@@ -40,4 +40,6 @@ make clean
 | USER_PASSWORD     | password for the SSH communicator  | yes      |
 | PACKER_OUTPUT_DIR | output directory for packer images | yes      |
 | VERSION           | image version to output            | yes      |
+| VM_NAME           | name of the packer image           | yes      |
+| DOMAIN            | domain of the packer image         | yes      |
 | PACKER_HEADLESS   | run virtualbox in headless mode    | no       |

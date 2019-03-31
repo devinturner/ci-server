@@ -9,7 +9,7 @@
     - ~~Store image on Digital Ocean~~
     - Update image format to work with Digital Ocean
 - Continuous Integration
-    - Run inspec tests against VirtualBox
+    - ~~Run inspec tests against VirtualBox~~
 
 ## v0.2.0 - Digital Ocean
 

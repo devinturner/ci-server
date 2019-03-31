@@ -4,6 +4,8 @@ USER_PASSWORD := packer
 USERNAME := packer
 PACKER_OUTPUT_DIR := output
 PACKER_HEADLESS := true
+VM_NAME := jenkins-base
+DOMAIN := local
 
 version : VERSION
 	@test -f VERSION
@@ -24,6 +26,7 @@ validate : version
 		-var PACKER_OUTPUT_DIR=${PACKER_OUTPUT_DIR} \
 		-var PACKER_HEADLESS=${PACKER_HEADLESS} \
 		-var VERSION=${VERSION} \
+		-var VM_NAME=${VM_NAME} \
 		template.json
 
 build : preseed version clean
@@ -35,6 +38,7 @@ build : preseed version clean
 		-var PACKER_OUTPUT_DIR=${PACKER_OUTPUT_DIR} \
 		-var PACKER_HEADLESS=${PACKER_HEADLESS} \
 		-var VERSION=${VERSION} \
+		-var VM_NAME=${VM_NAME} \
 		template.json
 
 clean :

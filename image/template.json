@@ -4,7 +4,9 @@
         "USER_PASSWORD": "",
         "PACKER_OUTPUT_DIR": "",
         "PACKER_HEADLESS": "true",
-        "VERSION": ""
+        "VERSION": "",
+        "VM_NAME": "",
+        "DOMAIN": ""
     },
     "provisioners": [
         {
@@ -64,8 +66,8 @@
                 "locale=en_US.UTF-8 ",
                 "kdb-chooser/method=us ",
                 "keyboard-configuration/xkb-keymap=us ",
-                "netcfg/get_hostname=ci-server ",
-                "netcfg/get_domain=devinturner.local ",
+                "netcfg/get_hostname={{user `VM_NAME`}} ",
+                "netcfg/get_domain={{user `DOMAIN`}} ",
                 "fb=false ",
                 "debconf/frontend=noninteractive ",
                 "console-setup/ask_detect=false ",
@@ -88,7 +90,7 @@
             "ssh_wait_timeout": "10000s",
             "guest_additions_path": "VBoxGuestAdditions_{{ .Version }}.iso",
             "shutdown_command": "echo {{user `USER_PASSWORD`}} | sudo -S shutdown -P now",
-            "vm_name": "ci-server-{{user `VERSION`}}",
+            "vm_name": "{{user `VM_NAME`}}-{{user `VERSION`}}",
             "virtualbox_version_file": ".vbox_version"
         }
     ]
