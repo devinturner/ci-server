@@ -1,23 +1,20 @@
 - [v0.1.0 - Local](#v010---local)
-- [v0.2.0 - Digital Ocean](#v020---digital-ocean)
+- [v0.2.0 - Configure jenkins](#v020---configure-jenkins)
 
 ## v0.1.0 - Local
 
 - Development
     - ~~Install jenkins + dependencies~~
     - ~~Install docker + dependencies~~
-    - ~~Store image on Digital Ocean~~
-    - ~~Update image format to work with Digital Ocean~~
+    - ~~Store image on private object storage
 - Continuous Integration
-    - ~~Run inspec tests against VirtualBox~~
+    - ~~Run inspec tests against VirtualBox for jenkins~~
 
-## v0.2.0 - Digital Ocean
-
-- Discovery
-    - Digital Ocean VM images w/ Packer
+## v0.2.0 - Configure jenkins
 - Development
-    - Update Packer template to support Digital Ocean
+    - jenkins initialization
+    - jenkins plugins
+    - jenkins settings
 - Continuous Integration
-    - Add terraform module testing to CI with terratest
-- Continuous Delivery
-    - Terraform deploys to Digital Ocean
+    - Update tests for jenkins
+    - Add testes for docker
