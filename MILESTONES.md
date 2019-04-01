@@ -7,7 +7,7 @@
     - ~~Install jenkins + dependencies~~
     - ~~Install docker + dependencies~~
     - ~~Store image on Digital Ocean~~
-    - Update image format to work with Digital Ocean
+    - ~~Update image format to work with Digital Ocean~~
 - Continuous Integration
     - ~~Run inspec tests against VirtualBox~~
 
