@@ -23,30 +23,15 @@
         },
         {
             "type": "shell",
-            "inline": [
-                "wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -",
-                "sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'",
-                "sudo apt-get -qq update",
-                "sudo apt-get -qq install jenkins -y"
-            ]
+            "script": "scripts/install_jenkins.sh"
         },
         {
             "type": "shell",
-            "inline": [
-                "wget -q -O - https://download.docker.com/linux/debian/gpg | sudo apt-key add -",
-                "sudo add-apt-repository 'deb [arch=amd64] https://download.docker.com/linux/debian stretch stable'",
-                "sudo apt-get -qq update",
-                "sudo apt-get -qq install docker-ce docker-ce-cli containerd.io"
-            ]
+            "script": "scripts/install_docker.sh"
         },
         {
             "type": "shell",
-            "inline": [
-                "sudo apt-get -qq autoremove -y --purge",
-                "sudo apt-get -qq autoclean",
-                "sudo dd if=/dev/zero of=/EMPTY bs=1M || true",
-                "sudo rm -rf /EMPTY"
-            ]
+            "script": "scripts/cleanup.sh"
         },
         {
             "type": "inspec",
