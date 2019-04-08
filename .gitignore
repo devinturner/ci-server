@@ -1,3 +1,3 @@
 image/http/preseed.cfg
-image/output
-image/packer_cache
+*/output
+*/packer_cache
