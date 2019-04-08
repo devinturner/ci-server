@@ -6,7 +6,7 @@
 - Development
     - ~~Install jenkins + dependencies~~
     - ~~Install docker + dependencies~~
-    - ~~Store image on private object storage
+    - ~~Store image on private object storage~~
 - Continuous Integration
     - ~~Run inspec tests against VirtualBox for jenkins~~
 
