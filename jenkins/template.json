@@ -13,15 +13,6 @@
         {
             "type": "shell",
             "script": "scripts/configure_jenkins.sh"
-        },
-        {
-            "type": "file",
-            "source": "scripts/groovy/",
-            "destination": "/var/lib/jenkins/init.groovy.d"
-        },
-        {
-            "type": "shell",
-            "inline": "sudo chown -R jenkins /var/lib/jenkins/init.groovy.d"
         }
     ],
     "builders": [
