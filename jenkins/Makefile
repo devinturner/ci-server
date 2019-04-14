@@ -6,7 +6,7 @@ PACKER_OUTPUT_DIR := output
 PACKER_HEADLESS := true
 VM_NAME := jenkins
 DOMAIN := local
-SOURCE_PATH := ../image/output/jenkins-base-0.0.4.ova
+SOURCE_PATH := ../image/output/jenkins-base-0.0.5.ova
 
 version : VERSION
 	@test -f VERSION
